@@ -17,7 +17,6 @@
 
 
 
-
 #ifndef SENSOR_HPP
 #define SENSOR_HPP
 
@@ -27,6 +26,11 @@
 #include "sam.h"
 #undef register
 #include <cstdint>
+
+#define C_red(c) ((uint8_t)((c)>>16 & 0xFF))
+#define C_blue(c) ((uint8_t)((c)>>8 & 0xFF))
+#define C_green(c) ((uint8_t)((c) & 0xFF))
+
 
 
 
