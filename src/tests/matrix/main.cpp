@@ -52,7 +52,7 @@ int main(){
             leds.all_leds(0);
             current = testcolors;
             while(*current != UINT32_C(0xFFFFFFFF)){
-                leds.set_led(i%leds.column_count(),i/leds.row_count(), *current);
+                leds.set_led(i%leds.column_count(),i/leds.column_count(), *current);
                 leds.update();
                 hwlib::wait_ms(50);
                 current++;
@@ -86,7 +86,7 @@ int main(){
         for(unsigned int j = 0;j < 10;j++){ //randomizes all individual led colors
             leds.all_leds(0);
             for(unsigned int i = 0;i < leds.column_count()*leds.row_count();i++){
-                leds.set_led(i%leds.column_count(),i/leds.row_count(), hwlib::rand());
+                leds.set_led(i%leds.column_count(),i/leds.column_count(), hwlib::rand());
             }
             leds.update();
             hwlib::wait_ms(250); 
