@@ -1,3 +1,14 @@
+// ==========================================================================
+//
+// File      : main.cpp
+// Part of   : IPASS LED matrix and Color sensor
+// Copyright : Tim Stolker - stolkertim@gmail.com 2020
+//
+// Distributed under the Boost Software License, Version 1.0.
+// (See accompanying file LICENSE_1_0.txt or copy at 
+// http://www.boost.org/LICENSE_1_0.txt)
+//
+// ==========================================================================
 #define SAM3XA 1
 
 #define register 

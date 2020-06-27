@@ -1,3 +1,15 @@
+// ==========================================================================
+//
+// File      : display.hpp
+// Part of   : IPASS LED matrix and Color sensor
+// Copyright : Tim Stolker - stolkertim@gmail.com 2020
+//
+// Distributed under the Boost Software License, Version 1.0.
+// (See accompanying file LICENSE_1_0.txt or copy at 
+// http://www.boost.org/LICENSE_1_0.txt)
+//
+// ==========================================================================
+
 //this file contains Doxygen lines
 ///file display.hpp
 /// \brief Datastruct for a LED matrix
@@ -42,10 +54,10 @@ static inline void write_byte(uint_fast8_t byte, Pio* port, uint_fast32_t mask, 
 
     for(uint_fast8_t i = 0; i < 8; i++){
         while(DUE_TIMER_VAL < next_time);
-        next_time = DUE_TIMER_VAL + 105; // 1,25 us * 84MHz = 105 // 1,25 us is the time of a complete bit writing
+        next_time = DUE_TIMER_VAL + 105; // 1,25 us * 84MHz = 105 // 1,25 us is the time of a complete bit writing (amount of cycles)
         port -> PIO_SODR = mask; 
 
-        if(byte & 0b10000000){
+        if(byte & 0b10000000){ //check MSB 
                                         
             while( (next_time - DUE_TIMER_VAL) > 31 ); // Timing from FastLED's library // Write a 1
 
@@ -82,7 +94,7 @@ public:
 
 
     /// \brief Lights up a single LED.
-    /// \details This function requires a x coordinate, an y coordinate and a color. The color needs to be 3 values, each between 0 and 255.
+    /// \details This function requires an x coordinate, a y coordinate and a color. The color is a 32 bit value with each 8 bits being a color. From left to right: Red,Green,Blue. The first 8 bits are valued 0.
     void set_led(unsigned int x, unsigned int y, uint32_t color){
     size_t index;
     if(y%2==0){
@@ -116,7 +128,7 @@ public:
 }
 
     /// \brief Lights up all the leds.
-    /// \details Requires a color. The color needs to be 3 values, each between 0 and 255. This will light up all the leds in the matrix with the same color.
+    /// \details Requires a color. The color is a 32 bit value with each 8 bits being a color. From left to right: Red,Green,Blue. The first 8 bits are valued 0. This will light up all the leds in the matrix with the same color.
     void all_leds(uint32_t color){
 
     for(unsigned int i = 0; i < rows*columns; i++){ 
@@ -125,7 +137,7 @@ public:
 }
 
     /// \brief Lights up a horizontal row of the same color on the matrix.
-    /// \details Requires a y coordinate and a color. The color needs to be 3 values, each between 0 and 255.
+    /// \details Requires a y coordinate and a color. The color is a 32 bit value with each 8 bits being a color. From left to right: Red,Green,Blue. The first 8 bits are valued 0.
     void horizontal_row(unsigned int y, uint32_t color){
 
     for(unsigned int i = 0; i < columns; i++){
@@ -134,9 +146,9 @@ public:
 
 }
 
-    //This will light up a vertical row of leds with the same color measured from the sensor input
+
     /// \brief Lights up a vertical row of the same color on the matrix.
-    /// \details Requires a x coordinate and a color. The color needs to be 3 values, each between 0 and 255.
+    /// \details Requires an x coordinate and a color. The color is a 32 bit value with each 8 bits being a color. From left to right: Red,Green,Blue. The first 8 bits are valued 0.
     void vertical_row(unsigned int x, uint32_t color){
 
     for(unsigned int i = 0; i < rows; i++){

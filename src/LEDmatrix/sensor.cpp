@@ -1,3 +1,15 @@
+// ==========================================================================
+//
+// File      : sensor.cpp
+// Part of   : IPASS LED matrix and Color sensor
+// Copyright : Tim Stolker - stolkertim@gmail.com 2020
+//
+// Distributed under the Boost Software License, Version 1.0.
+// (See accompanying file LICENSE_1_0.txt or copy at 
+// http://www.boost.org/LICENSE_1_0.txt)
+//
+// ==========================================================================
+
 #include "sensor.hpp"
 
 #include "tc.h"
@@ -22,9 +34,9 @@
 
 #define RGB(R,G,B) ( ( (uint32_t) ( R ) << 16 & 0x00FF0000 ) | ((uint32_t) ( G ) << 8 & 0x0000FF00 ) | ((uint32_t) ( B ) & 0x000000FF )  ) 
 
-#define set_red() port_s2 -> PIO_CODR = mask_s2; port_s3 -> PIO_CODR = mask_s3 
-#define set_green() port_s2 -> PIO_SODR = mask_s2; port_s3 -> PIO_SODR = mask_s3
-#define set_blue() port_s2 -> PIO_CODR = mask_s2; port_s3 -> PIO_SODR = mask_s3
+#define set_red() port_s2 -> PIO_CODR = mask_s2; port_s3 -> PIO_CODR = mask_s3 //set S2 to low and S3 to low
+#define set_green() port_s2 -> PIO_SODR = mask_s2; port_s3 -> PIO_SODR = mask_s3 //set S2 to high and S3 to high
+#define set_blue() port_s2 -> PIO_CODR = mask_s2; port_s3 -> PIO_SODR = mask_s3 //set S2 to low and S3 to high
 
 
 static uint32_t timer(Pio* port, uint32_t mask){
@@ -53,7 +65,38 @@ static uint32_t timer(Pio* port, uint32_t mask){
 
 //This function scales a min and max value to another min and max value
 static float map(float x,float x_min,float x_max,float out_min,float out_max){
-    return (x - x_min) * (out_max - out_min) / (x_max - x_min) + out_min;
+    /*  
+    x:
+    ---------------------------------------
+                      |          |
+    ---------------------------------------
+    0                 x_min      x_max
+    
+    x_1=x-x_min:              
+    ---------------------------------------
+    |          |
+    ---------------------------------------
+    0          x_max-x_min
+    
+    x_2=x_1/(x_max-x_min)
+    ---------------------------------------
+    |                                     |
+    ---------------------------------------
+    0                                     1
+    
+    x_3=x_2*(out_max-out_min)
+    ---------------------------------------
+    |              |
+    ---------------------------------------
+    0              out_max-out_min
+    
+    out=x_3+out_min
+    ---------------------------------------
+               |              |
+    ---------------------------------------
+    0          out_min        out_max 
+    */
+    return (x - x_min) * (out_max - out_min) / (x_max - x_min) + out_min; 
 }
 
 //This function makes sure that a value contains between 2 values
@@ -102,6 +145,7 @@ port_s3(port_s3), mask_s3(mask_s3)
     port_s3 -> PIO_OER = mask_s3;
     port_s3 -> PIO_PUDR = mask_s3;
 
+    //setting frequency scaling to 2%
     port_s0 -> PIO_CODR = mask_s0;
     port_s1 -> PIO_SODR = mask_s1;
 }
