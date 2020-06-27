@@ -9,15 +9,16 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES := tc.c pmc.c sensor.cpp
+SOURCES :=
 
 # header files in this project
-HEADERS := display.hpp sensor.hpp
+HEADERS :=
 
 # other places to look for files for this project
-SEARCH  := 
+SEARCH  :=
 
 # set RELATIVE to the next higher directory 
 # and defer to the appropriate Makefile.* there
 RELATIVE := ..
+include $(RELATIVE)/lib/Makefile
 include $(RELATIVE)/Makefile.due
