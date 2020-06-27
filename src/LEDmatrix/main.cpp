@@ -39,7 +39,6 @@
 #define S3_mask (1<<23)
 
 
-
 int main(){
     sam3xa::SystemInit();
     hwlib::target::uart_init();
