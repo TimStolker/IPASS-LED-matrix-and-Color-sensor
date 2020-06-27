@@ -99,14 +99,14 @@ int main(){
         
         bool x_pressed = ((X_port -> PIO_PDSR) & X_mask) == 0;
         if (!xbutton && x_pressed){
-            x = (x+1)%(5);
+            x = (x+1)%(leds.column_count());
             
         }
         xbutton = x_pressed;
 
         bool y_pressed = ((Y_port -> PIO_PDSR) & Y_mask) == 0;
         if (!ybutton && y_pressed){
-            y = (y+1)%(5);
+            y = (y+1)%(leds.row_count());
 
         }
         ybutton = y_pressed;
