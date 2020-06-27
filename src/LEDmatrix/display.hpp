@@ -96,65 +96,81 @@ public:
     /// \brief Lights up a single LED.
     /// \details This function requires an x coordinate, a y coordinate and a color. The color is a 32 bit value with each 8 bits being a color. From left to right: Red,Green,Blue. The first 8 bits are valued 0.
     void set_led(unsigned int x, unsigned int y, uint32_t color){
-    size_t index;
-    if(y%2==0){
-        index = y*columns + x;
-    }
-    else{
-        index = (y+1)*columns - 1 - x;
-    }
-    leds[index] = color;
-}
+        size_t index;
+        if(y%2==0){
+            index = y*columns + x;
+        }
+        else{
+            index = (y+1)*columns - 1 - x;
+        }
+        leds[index] = color;
+    }   
     /// \brief Updates the LED matrix.
     /// \details Uses the write_byte function to write the color on the LED strip.
     void update(){
-    tc_init(DUE_TIMER,DUE_TIMER_CHANNEL,TC_CMR_TCCLKS_TIMER_CLOCK1);
-    pmc_enable_periph_clk(DUE_TIMER_ID);
-    tc_start(DUE_TIMER,DUE_TIMER_CHANNEL);
-    port -> PIO_CODR = mask;
-    __disable_irq(); __disable_fault_irq();
+        tc_init(DUE_TIMER,DUE_TIMER_CHANNEL,TC_CMR_TCCLKS_TIMER_CLOCK1);
+        pmc_enable_periph_clk(DUE_TIMER_ID);
+        tc_start(DUE_TIMER,DUE_TIMER_CHANNEL);
+        port -> PIO_CODR = mask;
+        __disable_irq(); __disable_fault_irq();
 
-    uint32_t next_time = DUE_TIMER_VAL + 105;
+        uint32_t next_time = DUE_TIMER_VAL + 105;
 
-    for(size_t i = 0; i < rows*columns; i++){
-        write_byte(((leds[i] >> 8) & 0xFF), port, mask, next_time);
-        write_byte(((leds[i] >> 16) & 0xFF), port, mask, next_time);
-        write_byte(((leds[i]) & 0xFF), port, mask, next_time);
+        for(size_t i = 0; i < rows*columns; i++){
+            write_byte(((leds[i] >> 8) & 0xFF), port, mask, next_time);
+            write_byte(((leds[i] >> 16) & 0xFF), port, mask, next_time);
+            write_byte(((leds[i]) & 0xFF), port, mask, next_time);
+        }
+        
+        __enable_irq(); __enable_fault_irq();
+        tc_stop(DUE_TIMER,DUE_TIMER_CHANNEL);
+
     }
-    
-    __enable_irq(); __enable_fault_irq();
-    tc_stop(DUE_TIMER,DUE_TIMER_CHANNEL);
-
-}
 
     /// \brief Lights up all the leds.
     /// \details Requires a color. The color is a 32 bit value with each 8 bits being a color. From left to right: Red,Green,Blue. The first 8 bits are valued 0. This will light up all the leds in the matrix with the same color.
     void all_leds(uint32_t color){
 
-    for(unsigned int i = 0; i < rows*columns; i++){ 
-        leds[i] = color; 
+        for(unsigned int i = 0; i < rows*columns; i++){ 
+            leds[i] = color; 
+        }
     }
-}
 
     /// \brief Lights up a horizontal row of the same color on the matrix.
     /// \details Requires a y coordinate and a color. The color is a 32 bit value with each 8 bits being a color. From left to right: Red,Green,Blue. The first 8 bits are valued 0.
     void horizontal_row(unsigned int y, uint32_t color){
 
-    for(unsigned int i = 0; i < columns; i++){
-        set_led(i,y,color);
-    }
+        for(unsigned int i = 0; i < columns; i++){
+            set_led(i,y,color);
+        }
 
-}
+    }
 
 
     /// \brief Lights up a vertical row of the same color on the matrix.
     /// \details Requires an x coordinate and a color. The color is a 32 bit value with each 8 bits being a color. From left to right: Red,Green,Blue. The first 8 bits are valued 0.
     void vertical_row(unsigned int x, uint32_t color){
 
-    for(unsigned int i = 0; i < rows; i++){
-        set_led(x,i,color);
+        for(unsigned int i = 0; i < rows; i++){
+            set_led(x,i,color);
+        }
+
     }
-}
+
+    /// \brief finds the LED color of a specific coordinate on the matrix
+    /// \details Requires an x and a y coordinate. It returnes the color on the given coordinates. The color is a 32 bit value with each 8 bits being a color. From left to right: Red,Green,Blue. The first 8 bits are valued 0.
+    uint32_t get_led(unsigned int x, unsigned int y){
+        size_t index;
+        if(y%2==0){
+            index = y*columns + x;
+        }
+        else{
+            index = (y+1)*columns - 1 - x;
+        }
+
+        return leds[index];
+    }
+
 
 
     
