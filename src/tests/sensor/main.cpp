@@ -17,8 +17,6 @@
 #include "hwlib.hpp"
 #include <cstdint>
 #include "pmc.h"
-#include "tc.h"
-#include "display.hpp"
 #include "sensor.hpp"
 
 
