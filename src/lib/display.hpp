@@ -81,8 +81,8 @@ private:
     const uint32_t mask;
     uint32_t leds[rows*columns] = {0};
 public:
-    unsigned int row_count() const(return rows);
-    unsigned int column_count() const(return columns);
+    constexpr unsigned int row_count() {return rows;}
+    constexpr unsigned int column_count() {return columns;}
     /// \brief Constructor for the matrix.
     /// \details Accepts a port and it's mask.
     matrix(Pio* const port, const uint32_t mask):
