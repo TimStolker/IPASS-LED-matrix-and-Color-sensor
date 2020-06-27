@@ -1,0 +1,3 @@
+RELATIVE	?= .
+RELATIVE	:= $(RELATIVE)/hwlib
+include		$(RELATIVE)/makefile.link
