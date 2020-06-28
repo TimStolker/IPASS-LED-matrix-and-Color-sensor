@@ -46,7 +46,7 @@ How to use:
       pmc_enable_periph_clk(ID_PIOB);
       pmc_enable_periph_clk(ID_PIOC);
       pmc_enable_periph_clk(ID_PIOD);
-6. You now have everything to start using the matrix and the sensor. You can make a matrix like so: matric<amount of columns, amount of rows> name (P_port, P_mask);
+6. You now have everything to start using the matrix and the sensor. You can make a matrix like so: matrix<amount of columns, amount of rows> name (P_port, P_mask);
    You can add a sensor like this: sensor name (OUT_port, OUT_mask, S0_port, S0_mask, S1_port, S1_mask, S2_port, S2_mask, S3_port, S3_mask);
    From here on you can use the functions described in the doxygen.
 
