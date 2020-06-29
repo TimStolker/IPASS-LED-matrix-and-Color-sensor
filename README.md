@@ -3,16 +3,16 @@
 ## How to use:
 1. install the whole lib directory
 2. include the headers:
-  ```C++
-  #define register 
-  #include "sam.h"
-  #undef register
-  #include "hwlib.hpp"
-  #include <cstdint>
-  #include "pmc.h"
-  #include "tc.h"
-  #include "display.hpp"
-  ```
+      ```C++
+      #define register 
+      #include "sam.h"
+      #undef register
+      #include "hwlib.hpp"
+      #include <cstdint>
+      #include "pmc.h"
+      #include "tc.h"
+      #include "display.hpp"
+      ```
 3. Define SAM3XA `#define SAM3XA 1`
 4. Define the pins that you connected to the Arduino Due 
    Here is what you should define if you are using the Fritzing layout from layout.png: 
