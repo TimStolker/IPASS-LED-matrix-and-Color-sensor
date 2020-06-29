@@ -4,6 +4,9 @@
    - WS2812b LED strip
    - TCS3200D-TCS230
    - Arduino Due
+   - 3 push buttons
+   - 480 Ohm resistor
+   - 5V USB power supply 
 
 ## How to use:
 1. install the whole lib directory
