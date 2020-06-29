@@ -49,7 +49,7 @@
 
 
 
-static inline void write_byte(uint_fast8_t byte, Pio* port, uint_fast32_t mask, uint32_t & next_time) __attribute__((always_inline, unused)); 
+static inline void write_byte(uint_fast8_t byte, Pio* port, uint_fast32_t mask, uint32_t & next_time) __attribute__((always_inline, unused)); //inline function to speed up the process for timing reasons
 static inline void write_byte(uint_fast8_t byte, Pio* port, uint_fast32_t mask, uint32_t & next_time){
 
     for(uint_fast8_t i = 0; i < 8; i++){

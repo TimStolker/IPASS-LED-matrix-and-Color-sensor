@@ -59,8 +59,8 @@
 
 
 int main(){
-    sam3xa::SystemInit();
-    hwlib::target::uart_init();
+    sam3xa::SystemInit(); //setups the main clock
+    hwlib::target::uart_init(); //enable terminal printing 
 
     WDT->WDT_MR = WDT_MR_WDDIS; //turn off watchdog timer so the arduino doesn't reset itself
 
@@ -111,7 +111,7 @@ int main(){
         }
         ybutton = y_pressed;
         tempcolor = leds.get_led(x,y);
-        bool cursor = (hwlib::now_us()/250000)%2 == 0;
+        bool cursor = (hwlib::now_us()/250000)%2 == 0; //counts from a point in microseconds
         if(cursor){
             leds.set_led(x,y,RGB(100,100,100));
         }
