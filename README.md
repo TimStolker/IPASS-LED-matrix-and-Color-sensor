@@ -1,18 +1,22 @@
 # IPASS-LED-matrix-and-Color-sensor
 
-How to use:
+## How to use:
 1. install the whole lib directory
-2. include the headers (#define register 
-                        #include "sam.h"
-                        #undef register
-                        #include "hwlib.hpp"
-                        #include <cstdint>
-                        #include "pmc.h"
-                        #include "tc.h"
-                        #include "display.hpp")
-3. Define SAM3XA (#define SAM3XA 1)
+2. include the headers:
+  ```C++
+  #define register 
+  #include "sam.h"
+  #undef register
+  #include "hwlib.hpp"
+  #include <cstdint>
+  #include "pmc.h"
+  #include "tc.h"
+  #include "display.hpp"
+  ```
+3. Define SAM3XA `#define SAM3XA 1`
 4. Define the pins that you connected to the Arduino Due 
-   Here is what you should define if you are using the Fritzing layout from layout.png:  
+   Here is what you should define if you are using the Fritzing layout from layout.png: 
+      ```C++
       #define P_num 24
       #define P_port PIOA
       #define P_mask (1<<15)
@@ -36,7 +40,9 @@ How to use:
       #define S3_num 7
       #define S3_port PIOC
       #define S3_mask (1<<23)
+      ```
 5. To be able to controll the leds, you need to add this at the top of you main() :
+      ```C++
       sam3xa::SystemInit();
       hwlib::target::uart_init();
 
@@ -46,6 +52,7 @@ How to use:
       pmc_enable_periph_clk(ID_PIOB);
       pmc_enable_periph_clk(ID_PIOC);
       pmc_enable_periph_clk(ID_PIOD);
+      ```
 6. You now have everything to start using the matrix and the sensor. You can make a matrix like so: matrix<amount of columns, amount of rows> name (P_port, P_mask);
    You can add a sensor like this: sensor name (OUT_port, OUT_mask, S0_port, S0_mask, S1_port, S1_mask, S2_port, S2_mask, S3_port, S3_mask);
    From here on you can use the functions described in the doxygen.
