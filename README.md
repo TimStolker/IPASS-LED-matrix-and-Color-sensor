@@ -1,8 +1,8 @@
 # IPASS-LED-matrix-and-Color-sensor
 
 ## parts used:
-   -WS2812b LED strip
-   -TCS3200D-TCS230
+   - WS2812b LED strip
+   - TCS3200D-TCS230
 
 ## How to use:
 1. install the whole lib directory
