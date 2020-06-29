@@ -3,6 +3,7 @@
 ## parts used:
    - WS2812b LED strip
    - TCS3200D-TCS230
+   - Arduino Due
 
 ## How to use:
 1. install the whole lib directory
