@@ -1,6 +1,8 @@
 #ifndef PMC_H
 #define PMC_H
 
+#define SAM3XA 1
+
 
 #ifdef __cplusplus
 extern "C" {
