@@ -9,7 +9,6 @@
 // http://www.boost.org/LICENSE_1_0.txt)
 //
 // ==========================================================================
-#define SAM3XA 1
 
 #define register 
 #include "sam.h"
