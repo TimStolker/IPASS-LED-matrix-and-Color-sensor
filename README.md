@@ -64,8 +64,8 @@
    You can add a sensor like this: sensor name (OUT_port, OUT_mask, S0_port, S0_mask, S1_port, S1_mask, S2_port, S2_mask, S3_port, S3_mask);
    From here on you can use the functions described in the doxygen.
    
-## doxygen
-![layout](https://timstolker.github.io/IPASS-LED-matrix-and-Color-sensor/html/index.html "layout")
+## [doxygen](https://timstolker.github.io/IPASS-LED-matrix-and-Color-sensor/html/index.html)
+
 
 ## layout
 ![layout](https://github.com/TimStolker/IPASS-LED-matrix-and-Color-sensor/raw/master/Layout.png "layout") 
